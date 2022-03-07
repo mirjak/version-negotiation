@@ -1551,7 +1551,9 @@ Version Negotiation packets it receives in response to that connection attempt.<
 If parsing the Version Information failed (for example, if it is too short or if
 its length is not divisible by four), then the endpoint MUST close the
 connection; if the connection was using QUIC version 1, that connection closure
-MUST use a transport error of type TRANSPORT_PARAMETER_ERROR.<a href="#section-6-2" class="pilcrow">¶</a></p>
+MUST use a transport error of type TRANSPORT_PARAMETER_ERROR. If an endpoint
+receives a Chosen Version equal to zero, or any Other Version equal to zero, it
+MUST treat it as a parsing failure.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <p id="section-6-3">Every QUIC version that supports version negotiation MUST define a method for
 closing the connection with a version negotiation error. For QUIC version 1,
 version negotiation errors are signaled using a transport error of type
