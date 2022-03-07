@@ -1023,7 +1023,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Schinazi &amp; Rescorla</td>
-<td class="center">Expires 6 September 2022</td>
+<td class="center">Expires 8 September 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1036,12 +1036,12 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <dd class="internet-draft">draft-ietf-quic-version-negotiation-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-03-05" class="published">5 March 2022</time>
+<time datetime="2022-03-07" class="published">7 March 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-09-06">6 September 2022</time></dd>
+<dd class="expires"><time datetime="2022-09-08">8 September 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1095,7 +1095,7 @@ the negotiation can take place without incurring an extra round trip.<a href="#s
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 September 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 September 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1320,11 +1320,13 @@ to clients communicating with both updated and non-updated server instances.<a h
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-compatible-versions" class="section-name selfRef">Compatible Versions</a>
       </h2>
 <p id="section-3-1">If A and B are two distinct versions of QUIC, A is said to be "compatible" with
-B if it is possible to take a first flight of packets from version A and convert
-it into a first flight of packets from version B. As an example, if versions A
-and B are absolutely equal in their wire image and behavior during the handshake
-but differ after the handshake, then A is compatible with B and B is compatible
-with A.<a href="#section-3-1" class="pilcrow">¶</a></p>
+B if it is possible to take a first flight of packets from version A and
+convert it into a first flight of packets from version B. As an example, if
+versions A and B are absolutely equal in their wire image and behavior during
+the handshake but differ after the handshake, then A is compatible with B and B
+is compatible with A. Note that the conversion of the first flight can be lossy:
+some data such as QUICv1 0-RTT packets could be ignored during conversion and
+retransmitted later.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">Version compatibility is not symmetric: it is possible for version A to be
 compatible with version B and for B not to be compatible with A. This could
 happen for example if version B is a strict superset of version A.<a href="#section-3-2" class="pilcrow">¶</a></p>
