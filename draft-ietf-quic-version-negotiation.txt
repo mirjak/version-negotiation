@@ -84,7 +84,9 @@ Table of Contents
    12. IANA Considerations
      12.1.  QUIC Transport Parameter
      12.2.  QUIC Transport Error Code
-   13. Normative References
+   13. References
+     13.1.  Normative References
+     13.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -245,7 +247,11 @@ Table of Contents
    When a client creates a QUIC connection, its goal is to use an
    application layer protocol.  Therefore, when considering which
    versions are compatible, clients will only consider versions that
-   support the intended application layer protocol.
+   support one of the intended application layer protocols.  For
+   example, if the client's first flight advertises multiple Application
+   Layer Protocol Negotiation (ALPN) [RFC7301] tokens and multiple
+   compatible versions, the server needs to ensure that the ALPN token
+   that it selects can run over the QUIC version that it selects.
 
 4.  Version Negotiation Mechanism
 
@@ -553,7 +559,9 @@ Table of Contents
    of a codepoint in the 0-63 range to replace the provisional codepoint
    described above.
 
-13.  Normative References
+13.  References
+
+13.1.  Normative References
 
    [INV]      Thomson, M., "Version-Independent Properties of QUIC",
               RFC 8999, DOI 10.17487/RFC8999, May 2021,
@@ -572,6 +580,13 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+13.2.  Informative References
+
+   [RFC7301]  Friedl, S., Popov, A., Langley, A., and E. Stephan,
+              "Transport Layer Security (TLS) Application-Layer Protocol
+              Negotiation Extension", RFC 7301, DOI 10.17487/RFC7301,
+              July 2014, <https://www.rfc-editor.org/rfc/rfc7301>.
 
 Acknowledgments
 
