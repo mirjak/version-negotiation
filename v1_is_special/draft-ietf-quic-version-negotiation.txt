@@ -5,8 +5,8 @@
 QUIC                                                         D. Schinazi
 Internet-Draft                                                Google LLC
 Intended status: Standards Track                             E. Rescorla
-Expires: 8 September 2022                                        Mozilla
-                                                            7 March 2022
+Expires: 22 September 2022                                       Mozilla
+                                                           21 March 2022
 
 
                 Compatible Version Negotiation for QUIC
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 September 2022.
+   This Internet-Draft will expire on 22 September 2022.
 
 Copyright Notice
 
@@ -550,8 +550,9 @@ Table of Contents
    transport parameter with a Chosen Version set to 0x00000001 and an
    Other Version list containing exactly one version set to 0x00000001.
    This allows version negotiation to work with servers that only
-   support QUIC version 1, while preventing downgrade attacks against
-   servers that support QUIC version 1 and earlier versions.
+   support QUIC version 1.  Note that implementations which wish to use
+   VN to negotiate versions other than QUIC version 1 will need to
+   implement this draft.
 
 8.  Security Considerations
 
