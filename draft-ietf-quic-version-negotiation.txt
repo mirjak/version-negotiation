@@ -5,8 +5,8 @@
 QUIC                                                         D. Schinazi
 Internet-Draft                                                Google LLC
 Intended status: Standards Track                             E. Rescorla
-Expires: 16 September 2022                                       Mozilla
-                                                           15 March 2022
+Expires: 23 September 2022                                       Mozilla
+                                                           22 March 2022
 
 
                 Compatible Version Negotiation for QUIC
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 September 2022.
+   This Internet-Draft will expire on 23 September 2022.
 
 Copyright Notice
 
@@ -81,11 +81,12 @@ Table of Contents
      6.1.  Interaction with Retry
      6.2.  Interaction with TLS resumption
      6.3.  Interaction with 0-RTT
-   7.  Security Considerations
-   8.  IANA Considerations
-     8.1.  QUIC Transport Parameter
-     8.2.  QUIC Transport Error Code
-   9.  Normative References
+   7.  Special Handling for QUIC Version 1
+   8.  Security Considerations
+   9.  IANA Considerations
+     9.1.  QUIC Transport Parameter
+     9.2.  QUIC Transport Error Code
+   10. Normative References
    Acknowledgments
    Authors' Addresses
 
@@ -369,7 +370,7 @@ Table of Contents
    Every QUIC version that supports version negotiation MUST define a
    method for closing the connection with a version negotiation error.
    For QUIC version 1, version negotiation errors are signaled using a
-   transport error of type VERSION_NEGOTIATION_ERROR; see Section 8.2.
+   transport error of type VERSION_NEGOTIATION_ERROR; see Section 9.2.
 
    If the Version Information was missing, the endpoints MAY complete
    the handshake.  However, if a client has reacted to a Version
@@ -538,7 +539,23 @@ Table of Contents
    packets.  Alternatively, that document could specify that compatible
    version negotiation causes 0-RTT data to be rejected by the server.
 
-7.  Security Considerations
+7.  Special Handling for QUIC Version 1
+
+   Because QUIC version 1 was the only IETF Standards Track version of
+   QUIC published before this document, it is handled specially as
+   follows: if a client is starting a QUIC version 1 connection in
+   response to a received Version Negotiation packet, and the
+   version_information transport parameter is missing from the server's
+   transport parameters, then the client SHALL proceed as if the
+   server's transport parameters contained a version_information
+   transport parameter with a Chosen Version set to 0x00000001 and an
+   Other Version list containing exactly one version set to 0x00000001.
+   This allows version negotiation to work with servers that only
+   support QUIC version 1.  Note that implementations which wish to use
+   version negotiation to negotiate versions other than QUIC version 1
+   will need to implement this draft.
+
+8.  Security Considerations
 
    The security of this version negotiation mechanism relies on the
    authenticity of the Version Information exchanged during the
@@ -551,9 +568,9 @@ Table of Contents
    possibility of cross-protocol attacks, but more analysis is still
    needed here.
 
-8.  IANA Considerations
+9.  IANA Considerations
 
-8.1.  QUIC Transport Parameter
+9.1.  QUIC Transport Parameter
 
    This document registers a new value in the QUIC Transport Parameter
    Registry maintained at https://www.iana.org/assignments/quic/
@@ -571,7 +588,7 @@ Table of Contents
    of a codepoint in the 0-63 range to replace the provisional codepoint
    described above.
 
-8.2.  QUIC Transport Error Code
+9.2.  QUIC Transport Error Code
 
    This document registers a new value in the QUIC Transport Error Codes
    Registry maintained at https://www.iana.org/assignments/quic/
@@ -591,7 +608,7 @@ Table of Contents
    of a codepoint in the 0-63 range to replace the provisional codepoint
    described above.
 
-9.  Normative References
+10.  Normative References
 
    [ALPN]     Friedl, S., Popov, A., Langley, A., and E. Stephan,
               "Transport Layer Security (TLS) Application-Layer Protocol
