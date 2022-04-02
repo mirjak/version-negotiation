@@ -16,7 +16,13 @@ if the original and negotiated version share a compatible first flight format,
 the negotiation can take place without incurring an extra round trip. 
     " name="description">
 <meta content="xml2rfc 3.12.3" name="generator">
-<meta content="Internet-Draft" name="keyword">
+<meta content="quic" name="keyword">
+<meta content="version" name="keyword">
+<meta content="negotiation" name="keyword">
+<meta content="compatible" name="keyword">
+<meta content="incompatible" name="keyword">
+<meta content="not quite tls" name="keyword">
+<meta content="tls-ng" name="keyword">
 <meta content="draft-ietf-quic-version-negotiation-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.12.3
@@ -1019,11 +1025,11 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">QUIC Compatible VN</td>
-<td class="right">March 2022</td>
+<td class="right">April 2022</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Schinazi &amp; Rescorla</td>
-<td class="center">Expires 23 September 2022</td>
+<td class="center">Expires 4 October 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1036,12 +1042,12 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <dd class="internet-draft">draft-ietf-quic-version-negotiation-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-03-22" class="published">22 March 2022</time>
+<time datetime="2022-04-02" class="published">2 April 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-09-23">23 September 2022</time></dd>
+<dd class="expires"><time datetime="2022-10-04">4 October 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1066,15 +1072,19 @@ if the original and negotiated version share a compatible first flight format,
 the negotiation can take place without incurring an extra round trip.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
-      <h2 id="name-discussion-venues">
-<a href="#name-discussion-venues" class="section-name selfRef">Discussion Venues</a>
+      <h2 id="name-about-this-document">
+<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
       </h2>
 <p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
-<p id="section-note.1-2">Discussion of this document takes place on the
-  QUIC Working Group mailing list (quic@ietf.org),
-  which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/quic/">https://mailarchive.ietf.org/arch/browse/quic/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
-<p id="section-note.1-3">Source for this draft and an issue tracker can be found at
-  <span><a href="https://github.com/quicwg/version-negotiation">https://github.com/quicwg/version-negotiation</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">
+        The latest revision of this draft can be found at <span><a href="https://quicwg.github.io/version-negotiation/draft-ietf-quic-version-negotiation.html">https://quicwg.github.io/version-negotiation/draft-ietf-quic-version-negotiation.html</a></span>.
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-ietf-quic-version-negotiation/">https://datatracker.ietf.org/doc/draft-ietf-quic-version-negotiation/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">
+        Discussion of this document takes place on the
+        QUIC Working Group mailing list (<span><a href="mailto:quic@ietf.org">mailto:quic@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/quic/">https://mailarchive.ietf.org/arch/browse/quic/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
+        <span><a href="https://github.com/quicwg/version-negotiation">https://github.com/quicwg/version-negotiation</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1095,7 +1105,7 @@ the negotiation can take place without incurring an extra round trip.<a href="#s
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 23 September 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 October 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1231,13 +1241,13 @@ of "compatible" versions without additional round trips.<a href="#section-1-3" c
         <h3 id="name-conventions-and-definitions">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
         </h3>
-<p id="section-1.1-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="xref">RFC8174</a>]</span>
-when, and only when, they appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
+described in BCP 14 <span>[<a href="#RFC2119" class="xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="xref">RFC8174</a>]</span> when, and only when, they
+appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">In this document, the Maximum Segment Lifetime (MSL) represents the time a QUIC
 packet can exist in the network. Implementations can make this configurable, and
-a RECOMMENDED value is one minute.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+a <span class="bcp14">RECOMMENDED</span> value is one minute.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1261,7 +1271,7 @@ downgrade attacks (see <a href="#downgrade" class="xref">Section 4</a>).<a href=
 parse first flights from the original version. If it does not, then it starts
 incompatible version negotiation, see <a href="#incompat-vn" class="xref">Section 2.1</a>. If the server can parse
 the first flight, it can either establish the connection using the original
-version, or it MAY attempt compatible version negotiation, see <a href="#compat-vn" class="xref">Section 2.3</a>.<a href="#section-2-3" class="pilcrow">¶</a></p>
+version, or it <span class="bcp14">MAY</span> attempt compatible version negotiation, see <a href="#compat-vn" class="xref">Section 2.3</a>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">Note that it is possible for a server to have the ability to parse the first
 flight of a given version without fully supporting it, in the sense that it
 implements enough of the version's specification to parse first flight packets
@@ -1272,9 +1282,9 @@ but not enough to fully establish a connection using that version.<a href="#sect
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-incompatible-version-negoti" class="section-name selfRef">Incompatible Version Negotiation</a>
         </h3>
 <p id="section-2.1-1">The server starts incompatible version negotiation by sending a Version
-Negotiation packet. This packet SHALL include each entry from the server's set
+Negotiation packet. This packet <span class="bcp14">SHALL</span> include each entry from the server's set
 of Offered Versions (see <a href="#server-fleet" class="xref">Section 5</a>) in a Supported Version field. The
-server MAY add reserved versions (as defined in <span><a href="https://rfc-editor.org/rfc/rfc9000#section-6.3" class="relref">Section 6.3</a> of [<a href="#QUIC" class="xref">QUIC</a>]</span>) in
+server <span class="bcp14">MAY</span> add reserved versions (as defined in <span><a href="https://rfc-editor.org/rfc/rfc9000#section-6.3" class="relref">Section 6.3</a> of [<a href="#QUIC" class="xref">QUIC</a>]</span>) in
 Supported Version fields.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.1-2">Clients will ignore a Version Negotiation packet if it contains the original
 version attempted by the client. The client also ignores a Version Negotiation
@@ -1319,8 +1329,7 @@ where that frame is not used. In this example, first flights using version B
 that carry this new frame would not be compatible with version A.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
 <p id="section-2.2-4">When a new version of QUIC is defined, it is assumed to not be compatible with
 any other version unless otherwise specified. Similarly, no other version is
-compatible with the new version unless otherwise specified. Implementations MUST
-NOT assume compatibility between versions unless explicitly specified.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
+compatible with the new version unless otherwise specified. Implementations <span class="bcp14">MUST NOT</span> assume compatibility between versions unless explicitly specified.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
 <p id="section-2.2-5">Note that both endpoints might disagree on whether two versions are compatible
 or not. For example, two versions could have been defined concurrently and then
 specified as compatible in a third document much later - in that scenario one
@@ -1349,8 +1358,7 @@ client's first flight is compatible with this version, then the server converts
 the client's first flight to that version and replies to the client as if it had
 received the converted first flight. Note that this conversion process cannot
 fail by definition of the first flight being compatible. The version used by the
-server in its reply is refered to as the "negotiated version". The server MUST
-NOT reply with a version that is not present in the client's compatible
+server in its reply is refered to as the "negotiated version". The server <span class="bcp14">MUST NOT</span> reply with a version that is not present in the client's compatible
 versions, unless it is the original version.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
 <p id="section-2.3-3">Clients will be made aware of compatible version negotiation by seeing a change
 in the QUIC long header Version field. It is possible for the server to
@@ -1395,7 +1403,7 @@ version that follows.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
         <h3 id="name-client-choice-of-original-v">
 <a href="#section-2.5" class="section-number selfRef">2.5. </a><a href="#name-client-choice-of-original-v" class="section-name selfRef">Client Choice of Original Version</a>
         </h3>
-<p id="section-2.5-1">The client's first connection attempt SHOULD be made using the version that the
+<p id="section-2.5-1">The client's first connection attempt <span class="bcp14">SHOULD</span> be made using the version that the
 server is most likely to support. The client selects the version most likely to
 be supported from the versions that are compatible with the client's most
 preferred version. Without additional information this could mean selecting the
@@ -1411,7 +1419,7 @@ oldest version that the client supports.<a href="#section-2.5-1" class="pilcrow"
       </h2>
 <p id="section-3-1">During the handshake, endpoints will exchange Version Information, which
 consists of a chosen version and a list of other versions. Any version of QUIC
-that supports this mechanism MUST provide a mechanism to exchange Version
+that supports this mechanism <span class="bcp14">MUST</span> provide a mechanism to exchange Version
 Information in both directions during the handshake, such that this data is
 authenticated.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">In QUIC version 1, the Version Information is transmitted using a new transport
@@ -1443,14 +1451,14 @@ header that carries this data.<a href="#section-3-5.2.1" class="pilcrow">¶</a><
 </dl>
 <p id="section-3-6">The contents of the Other Versions field depends on whether it is sent by the
 client or by the server.<a href="#section-3-6" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-3-7">
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-3-7">
         <dt id="section-3-7.1">Client-Sent Other Versions:</dt>
         <dd style="margin-left: 1.5em" id="section-3-7.2">
           <p id="section-3-7.2.1">When sent by a client, the Other Versions field lists all the versions that
 this first flight is compatible with, ordered by descending preference. Note
-that the version in the Chosen Version field MUST be included in this list to
+that the version in the Chosen Version field <span class="bcp14">MUST</span> be included in this list to
 allow the client to communicate the chosen version's preference. Note that this
-preference is only advisory, servers MAY choose to use their own preference
+preference is only advisory, servers <span class="bcp14">MAY</span> choose to use their own preference
 instead.<a href="#section-3-7.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
@@ -1460,11 +1468,11 @@ instead.<a href="#section-3-7.2.1" class="pilcrow">¶</a></p>
 Versions of this server deployment, see <a href="#server-fleet" class="xref">Section 5</a>. Note that the version
 in the Chosen Version field is not necessarily included in this list, because
 the server operator could be in the process of removing support for this
-version. For the same reason, the Other Versions field MAY be empty.<a href="#section-3-7.4.1" class="pilcrow">¶</a></p>
+version. For the same reason, the Other Versions field <span class="bcp14">MAY</span> be empty.<a href="#section-3-7.4.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
-<p id="section-3-8">Clients and servers MAY both include versions following the pattern 0x?a?a?a?a
+<p id="section-3-8">Clients and servers <span class="bcp14">MAY</span> both include versions following the pattern 0x?a?a?a?a
 in their Other Versions list. Those versions are reserved to exercise version
 negotiation (see the Versions section of <span>[<a href="#QUIC" class="xref">QUIC</a>]</span>), and will never be selected
 when choosing a version to use.<a href="#section-3-8" class="pilcrow">¶</a></p>
@@ -1475,35 +1483,35 @@ when choosing a version to use.<a href="#section-3-8" class="pilcrow">¶</a></p>
       <h2 id="name-version-downgrade-preventio">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-version-downgrade-preventio" class="section-name selfRef">Version Downgrade Prevention</a>
       </h2>
-<p id="section-4-1">Clients MUST ignore any received Version Negotiation packets that contain the
+<p id="section-4-1">Clients <span class="bcp14">MUST</span> ignore any received Version Negotiation packets that contain the
 version that they initially attempted. A client that makes a connection attempt
-based on information received from a Version Negotiation packet MUST ignore any
+based on information received from a Version Negotiation packet <span class="bcp14">MUST</span> ignore any
 Version Negotiation packets it receives in response to that connection attempt.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">Both endpoints MUST parse their peer's Version Information during the handshake.
+<p id="section-4-2">Both endpoints <span class="bcp14">MUST</span> parse their peer's Version Information during the handshake.
 If parsing the Version Information failed (for example, if it is too short or if
-its length is not divisible by four), then the endpoint MUST close the
+its length is not divisible by four), then the endpoint <span class="bcp14">MUST</span> close the
 connection; if the connection was using QUIC version 1, that connection closure
-MUST use a transport error of type TRANSPORT_PARAMETER_ERROR. If an endpoint
+<span class="bcp14">MUST</span> use a transport error of type TRANSPORT_PARAMETER_ERROR. If an endpoint
 receives a Chosen Version equal to zero, or any Other Version equal to zero, it
-MUST treat it as a parsing failure.<a href="#section-4-2" class="pilcrow">¶</a></p>
-<p id="section-4-3">Every QUIC version that supports version negotiation MUST define a method for
+<span class="bcp14">MUST</span> treat it as a parsing failure.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-3">Every QUIC version that supports version negotiation <span class="bcp14">MUST</span> define a method for
 closing the connection with a version negotiation error. For QUIC version 1,
 version negotiation errors are signaled using a transport error of type
 VERSION_NEGOTIATION_ERROR; see <a href="#iana-error" class="xref">Section 9.2</a>.<a href="#section-4-3" class="pilcrow">¶</a></p>
-<p id="section-4-4">If the Version Information was missing, the endpoints MAY complete the
+<p id="section-4-4">If the Version Information was missing, the endpoints <span class="bcp14">MAY</span> complete the
 handshake. However, if a client has reacted to a Version Negotiation packet and
-the Version Information was missing, the client MUST close the connection with a
+the Version Information was missing, the client <span class="bcp14">MUST</span> close the connection with a
 version negotiation error.<a href="#section-4-4" class="pilcrow">¶</a></p>
 <p id="section-4-5">If the client received and acted on a Version Negotiation packet, the client
-MUST validate the server's Other Versions field. The Other Versions field is
+<span class="bcp14">MUST</span> validate the server's Other Versions field. The Other Versions field is
 validated by confirming that the client would have attempted the same version
 with knowledge of the versions the server supports. That is, the client would
 have selected the same version if it received a Version Negotiation packet that
 listed the versions in the server's Other Versions field, plus the negotiated
-version. If the client would have selected a different version, the client MUST
+version. If the client would have selected a different version, the client <span class="bcp14">MUST</span>
 close the connection with a version negotiation error. In particular, if the
 client reacted to a Version Negotiation packet and the server's Other Versions
-field is empty, the client MUST close the connection with a version negotiation
+field is empty, the client <span class="bcp14">MUST</span> close the connection with a version negotiation
 error. These connection closures prevent an attacker from being able to use
 forged Version Negotiation packets to force a version downgrade.<a href="#section-4-5" class="pilcrow">¶</a></p>
 <p id="section-4-6">This validation of Other Versions is not sufficient to prevent downgrade.
@@ -1515,9 +1523,9 @@ Version field of its Version Information. That remains true even if other
 versions were used in the Version field of long headers at any point in the
 lifetime of the connection. In particular, since during compatible version
 negotiation the client is made aware of the negotiated version by the QUIC long
-header version (see <a href="#compat-vn" class="xref">Section 2.3</a>), clients MUST validate that the server's
+header version (see <a href="#compat-vn" class="xref">Section 2.3</a>), clients <span class="bcp14">MUST</span> validate that the server's
 Chosen Version is equal to the negotiated version; if they do not match, the
-client MUST close the connection with a version negotiation error. This prevents
+client <span class="bcp14">MUST</span> close the connection with a version negotiation error. This prevents
 an attacker's ability to influence version negotiation by forging the Version
 long header field.<a href="#section-4-7" class="pilcrow">¶</a></p>
 </section>
@@ -1530,7 +1538,7 @@ long header field.<a href="#section-4-7" class="pilcrow">¶</a></p>
 <p id="section-5-1">While this document mainly discusses a single QUIC server, it is common for
 deployments of QUIC servers to include a fleet of multiple server instances. We
 therefore define the following terms:<a href="#section-5-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-5-2">
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-5-2">
         <dt id="section-5-2.1">Acceptable Versions:</dt>
         <dd style="margin-left: 1.5em" id="section-5-2.2">
           <p id="section-5-2.2.1">This is the set of versions supported by a given server instance. More
@@ -1565,7 +1573,7 @@ to receive a stale Version Negotiation packet if the server performs its
 software update while the Version Negotiation packet is in flight.<a href="#section-5-4" class="pilcrow">¶</a></p>
 <p id="section-5-5">This could cause the version downgrade prevention mechanism described in
 <a href="#downgrade" class="xref">Section 4</a> to falsely detect a downgrade attack. To avoid that, server
-operators SHOULD perform a three-step process when they wish to add or remove
+operators <span class="bcp14">SHOULD</span> perform a three-step process when they wish to add or remove
 support for a version:<a href="#section-5-5" class="pilcrow">¶</a></p>
 <p id="section-5-6">When adding support for a new version:<a href="#section-5-6" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1609,7 +1617,7 @@ to clients communicating with both updated and non-updated server instances.<a h
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-considerations-for-future-v" class="section-name selfRef">Considerations for Future Versions</a>
       </h2>
 <p id="section-6-1">In order to facilitate the deployment of future versions of QUIC, designers of
-future versions SHOULD attempt to design their new version such that commonly
+future versions <span class="bcp14">SHOULD</span> attempt to design their new version such that commonly
 deployed versions are compatible with it.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">QUIC version 1 defines multiple features which are not documented in the QUIC
 invariants. Since at the time of writing QUIC version 1 is widely deployed,
@@ -1626,7 +1634,7 @@ sends a Retry packet can do so before parsing the client's first flight. A
 server that sends a Retry packet therefore might not have processed the client's
 Version Information before doing so.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-2">If a future document wishes to define compatibility between two versions that
-support retry, that document MUST specify how version negotiation (both
+support retry, that document <span class="bcp14">MUST</span> specify how version negotiation (both
 compatible and incompatible) interacts with retry during a handshake that
 requires both. For example, that could be accomplished by having the server send
 a Retry packet in the original version first and therefore validating the
@@ -1643,7 +1651,7 @@ though the Retry itself was sent using the original version.<a href="#section-6.
         </h3>
 <p id="section-6.2-1">QUIC version 1 uses TLS 1.3, which supports session resumption by sending
 session tickets in one connection that can be used in a later connection; see
-<span><a href="https://rfc-editor.org/rfc/rfc8446#section-2.2" class="relref">Section 2.2</a> of [<a href="#TLS" class="xref">TLS</a>]</span>. New versions that also use TLS 1.3 SHOULD
+<span><a href="https://rfc-editor.org/rfc/rfc8446#section-2.2" class="relref">Section 2.2</a> of [<a href="#TLS" class="xref">TLS</a>]</span>. New versions that also use TLS 1.3 <span class="bcp14">SHOULD</span>
 mandate that their session tickets are rightly scoped to one version of QUIC;
 i.e., require that clients not use them across version and that servers validate
 this client requirement.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
@@ -1656,7 +1664,7 @@ this client requirement.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-6.3-1">QUIC version 1 allows sending data from the client to the server during the
 handshake, by using 0-RTT packets. If a future document wishes to define
-compatibility between two versions that support 0-RTT, that document MUST
+compatibility between two versions that support 0-RTT, that document <span class="bcp14">MUST</span>
 address the scenario where there are 0-RTT packets in the client's first flight.
 For example, this could be accomplished by defining which transformations are
 applied to 0-RTT packets. Alternatively, that document could specify that
@@ -1674,7 +1682,7 @@ compatible version negotiation causes 0-RTT data to be rejected by the server.<a
 published before this document, it is handled specially as follows: if a client
 is starting a QUIC version 1 connection in response to a received Version
 Negotiation packet, and the version_information transport parameter is missing
-from the server's transport parameters, then the client SHALL proceed as if the
+from the server's transport parameters, then the client <span class="bcp14">SHALL</span> proceed as if the
 server's transport parameters contained a version_information transport
 parameter with a Chosen Version set to 0x00000001 and an Other Version list
 containing exactly one version set to 0x00000001. This allows version
@@ -1707,10 +1715,9 @@ possibility of cross-protocol attacks, but more analysis is still needed here.<a
         <h3 id="name-quic-transport-parameter">
 <a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-quic-transport-parameter" class="section-name selfRef">QUIC Transport Parameter</a>
         </h3>
-<p id="section-9.1-1">This document registers a new value in the QUIC Transport Parameter Registry
-maintained at
-<span><a href="https://www.iana.org/assignments/quic/quic.xhtml#quic-transport">https://www.iana.org/assignments/quic/quic.xhtml#quic-transport</a></span>.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-9.1-2">
+<p id="section-9.1-1">This document registers a new value in the "QUIC Transport Parameters" registry
+maintained at &lt;<span><a href="https://www.iana.org/assignments/quic">https://www.iana.org/assignments/quic</a></span>&gt;.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-9.1-2">
           <dt id="section-9.1-2.1">Value:</dt>
           <dd style="margin-left: 1.5em" id="section-9.1-2.2">
             <p id="section-9.1-2.2.1">0xFF73DB<a href="#section-9.1-2.2.1" class="pilcrow">¶</a></p>
@@ -1741,10 +1748,9 @@ codepoint in the 0-63 range to replace the provisional codepoint described above
         <h3 id="name-quic-transport-error-code">
 <a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-quic-transport-error-code" class="section-name selfRef">QUIC Transport Error Code</a>
         </h3>
-<p id="section-9.2-1">This document registers a new value in the QUIC Transport Error Codes Registry
-maintained at
-<span><a href="https://www.iana.org/assignments/quic/quic.xhtml#quic-transport-error-codes">https://www.iana.org/assignments/quic/quic.xhtml#quic-transport-error-codes</a></span>.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-9.2-2">
+<p id="section-9.2-1">This document registers a new value in the "QUIC Transport Error Codes" registry
+maintained at &lt;<span><a href="https://www.iana.org/assignments/quic">https://www.iana.org/assignments/quic</a></span>&gt;.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-9.2-2">
           <dt id="section-9.2-2.1">Value:</dt>
           <dd style="margin-left: 1.5em" id="section-9.2-2.2">
             <p id="section-9.2-2.2.1">0x53F8<a href="#section-9.2-2.2.1" class="pilcrow">¶</a></p>
@@ -1827,7 +1833,8 @@ Peon, Anthony Rossi, and Martin Thomson for their input and contributions.<a hre
 <div dir="auto" class="left"><span class="org">Google LLC</span></div>
 <div dir="auto" class="left"><span class="street-address">1600 Amphitheatre Parkway</span></div>
 <div dir="auto" class="left">
-<span class="locality">Mountain View, California 94043</span>,  </div>
+<span class="locality">Mountain View</span>, <span class="region">CA</span> <span class="postal-code">94043</span>
+</div>
 <div dir="auto" class="left"><span class="country-name">United States of America</span></div>
 <div class="email">
 <span>Email:</span>

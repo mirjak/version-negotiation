@@ -5,8 +5,8 @@
 QUIC                                                         D. Schinazi
 Internet-Draft                                                Google LLC
 Intended status: Standards Track                             E. Rescorla
-Expires: 23 September 2022                                       Mozilla
-                                                           22 March 2022
+Expires: 4 October 2022                                          Mozilla
+                                                            2 April 2022
 
 
                 Compatible Version Negotiation for QUIC
@@ -22,12 +22,18 @@ Abstract
    negotiated version share a compatible first flight format, the
    negotiation can take place without incurring an extra round trip.
 
-Discussion Venues
+About This Document
 
    This note is to be removed before publishing as an RFC.
 
+   The latest revision of this draft can be found at
+   https://quicwg.github.io/version-negotiation/draft-ietf-quic-version-
+   negotiation.html.  Status information for this document may be found
+   at https://datatracker.ietf.org/doc/draft-ietf-quic-version-
+   negotiation/.
+
    Discussion of this document takes place on the QUIC Working Group
-   mailing list (quic@ietf.org), which is archived at
+   mailing list (mailto:quic@ietf.org), which is archived at
    https://mailarchive.ietf.org/arch/browse/quic/.
 
    Source for this draft and an issue tracker can be found at
@@ -48,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 September 2022.
+   This Internet-Draft will expire on 4 October 2022.
 
 Copyright Notice
 
@@ -118,8 +124,8 @@ Table of Contents
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-   "OPTIONAL" in this document are to be interpreted as described in BCP
-   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
    In this document, the Maximum Segment Lifetime (MSL) represents the
@@ -336,7 +342,6 @@ Table of Contents
       to allow the client to communicate the chosen version's
       preference.  Note that this preference is only advisory, servers
       MAY choose to use their own preference instead.
-
    Server-Sent Other Versions:  When sent by a server, the Other
       Versions field lists all the Fully-Deployed Versions of this
       server deployment, see Section 5.  Note that the version in the
@@ -420,13 +425,11 @@ Table of Contents
       given server instance.  More specifically, these are the versions
       that a given server instance will use if a client sends a first
       flight using them.
-
    Offered Versions:  This is the set of versions that a given server
       instance will send in a Version Negotiation packet if it receives
       a first flight from an unknown version.  This set will most often
       be equal to the Acceptaple Versions set, except during short
       transitions while versions are added or removed (see below).
-
    Fully-Deployed Versions:  This is the set of QUIC versions that is
       supported and negotiated by every single QUIC server instance in
       this deployment.  If a deployment only contains a single server
@@ -572,16 +575,13 @@ Table of Contents
 
 9.1.  QUIC Transport Parameter
 
-   This document registers a new value in the QUIC Transport Parameter
-   Registry maintained at https://www.iana.org/assignments/quic/
-   quic.xhtml#quic-transport.
+   This document registers a new value in the "QUIC Transport
+   Parameters" registry maintained at <https://www.iana.org/assignments/
+   quic>.
 
    Value:  0xFF73DB
-
    Parameter Name:  version_information
-
    Status:  provisional
-
    Specification:  This document
 
    When this document is approved, it will request permanent allocation
@@ -590,18 +590,14 @@ Table of Contents
 
 9.2.  QUIC Transport Error Code
 
-   This document registers a new value in the QUIC Transport Error Codes
-   Registry maintained at https://www.iana.org/assignments/quic/
-   quic.xhtml#quic-transport-error-codes.
+   This document registers a new value in the "QUIC Transport Error
+   Codes" registry maintained at <https://www.iana.org/assignments/
+   quic>.
 
    Value:  0x53F8
-
    Code:  VERSION_NEGOTIATION_ERROR
-
    Description:  Error negotiating version
-
    Status:  provisional
-
    Specification:  This document
 
    When this document is approved, it will request permanent allocation
@@ -648,7 +644,7 @@ Authors' Addresses
    David Schinazi
    Google LLC
    1600 Amphitheatre Parkway
-   Mountain View, California 94043,
+   Mountain View, CA 94043
    United States of America
    Email: dschinazi.ietf@gmail.com
 
