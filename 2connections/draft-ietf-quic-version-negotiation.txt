@@ -290,7 +290,8 @@ Table of Contents
 
    Note that this separation across two connections is conceptual: it
    applies to normative requirements on QUIC connections, but does not
-   require implementations to use two distinct connection objects.
+   require implementations to internally use two distinct connection
+   objects.
 
 2.5.  Client Choice of Original Version
 
