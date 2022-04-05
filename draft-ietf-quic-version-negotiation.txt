@@ -5,8 +5,8 @@
 QUIC                                                         D. Schinazi
 Internet-Draft                                                Google LLC
 Intended status: Standards Track                             E. Rescorla
-Expires: 4 October 2022                                          Mozilla
-                                                            2 April 2022
+Expires: 7 October 2022                                          Mozilla
+                                                            5 April 2022
 
 
                 Compatible Version Negotiation for QUIC
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 October 2022.
+   This Internet-Draft will expire on 7 October 2022.
 
 Copyright Notice
 
@@ -515,7 +515,7 @@ Table of Contents
    negotiation (both compatible and incompatible) interacts with retry
    during a handshake that requires both.  For example, that could be
    accomplished by having the server send a Retry packet in the original
-   version first and therefore validating the client's IP address before
+   version first thereby validating the client's IP address before
    attempting compatible version negotiation.  If both versions support
    authenticating Retry packets, the compatibility defition needs to
    define how to authenticate the Retry in the negotiated version
@@ -527,9 +527,9 @@ Table of Contents
    QUIC version 1 uses TLS 1.3, which supports session resumption by
    sending session tickets in one connection that can be used in a later
    connection; see Section 2.2 of [TLS].  New versions that also use TLS
-   1.3 SHOULD mandate that their session tickets are rightly scoped to
+   1.3 SHOULD mandate that their session tickets are tightly scoped to
    one version of QUIC; i.e., require that clients not use them across
-   version and that servers validate this client requirement.
+   multiple version and that servers validate this client requirement.
 
 6.3.  Interaction with 0-RTT
 
@@ -539,8 +539,8 @@ Table of Contents
    0-RTT, that document MUST address the scenario where there are 0-RTT
    packets in the client's first flight.  For example, this could be
    accomplished by defining which transformations are applied to 0-RTT
-   packets.  Alternatively, that document could specify that compatible
-   version negotiation causes 0-RTT data to be rejected by the server.
+   packets.  That document could specify that compatible version
+   negotiation causes 0-RTT data to be rejected by the server.
 
 7.  Special Handling for QUIC Version 1
 
