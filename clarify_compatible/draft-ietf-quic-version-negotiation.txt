@@ -148,14 +148,14 @@ Table of Contents
    version negotation (see Section 2.3), and to prevent version
    downgrade attacks (see Section 4).  We'll refer to the version of the
    very first packets the client sends as the "original version" and the
-   version of the first packets the client sends in a a given QUIC
+   version of the first packets the client sends in a given QUIC
    connection as the "client's chosen version".
 
    Upon receiving this first flight, the server verifies whether it
    knows how to parse first flights from the original version.  If it
    does not, then it starts incompatible version negotiation, see
-   Section 2.1, which causes the client to initiate new connection with
-   a different version.  For instance, if the client initiates a
+   Section 2.1, which causes the client to initiate a new connection
+   with a different version.  For instance, if the client initiates a
    connection with version 1 and the server starts incompatible version
    negotiation and the client then initiates a new connection with
    version 2, we say that the first connection's client chosen version
@@ -248,8 +248,8 @@ Table of Contents
    Information structure (see Section 3).  This contains the list of
    versions that the client knows its first flight is compatible with.
 
-   In order to do compatible version negotiation, the server MUST select
-   one of these versions that (1) it supports and (2) it knows is
+   In order to perform compatible version negotiation, the server MUST
+   select one of these versions that (1) it supports and (2) it knows is
    compatible with the client's chosen version.  Once the server has
    selected a version, termed the "negotiated version", it then attempts
    to convert the client's first flight into that version, and replies
@@ -257,7 +257,7 @@ Table of Contents
 
    If those formats are identical, as in cases where the negotiated
    version is the same as the client's chosen version, then this will be
-   the identity transform).  If the first flight is correctly formatted,
+   the identity transform.  If the first flight is correctly formatted,
    then this conversion process cannot fail by definition of the first
    flight being compatible; if the server is unable to convert the first
    flight, it MUST respond with CONNECTION_CLOSE and an error of

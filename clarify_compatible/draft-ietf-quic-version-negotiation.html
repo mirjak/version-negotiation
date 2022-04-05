@@ -1276,11 +1276,11 @@ enable compatible version negotation (see <a href="#compat-vn" class="xref">Sect
 prevent version downgrade attacks (see <a href="#downgrade" class="xref">Section 4</a>).  We'll refer to
 the version of the very first packets the client sends as the "original version"
 and the version of the first packets the client sends in a
-a given QUIC connection as the "client's chosen version".<a href="#section-2-2" class="pilcrow">¶</a></p>
+given QUIC connection as the "client's chosen version".<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">Upon receiving this first flight, the server verifies whether it knows how to
 parse first flights from the original version. If it does not, then it starts
 incompatible version negotiation, see <a href="#incompat-vn" class="xref">Section 2.1</a>, which causes the
-client to initiate new connection with a different version.
+client to initiate a new connection with a different version.
 For instance, if the client initiates a connection with version 1
 and the server starts incompatible version negotiation and the client
 then initiates a new connection with version 2, we say that
@@ -1363,7 +1363,7 @@ endpoint might be aware of the compatibility document while the other may not.<a
 chosen version, it can extract the client's Version Information structure
 (see <a href="#vers-info" class="xref">Section 3</a>). This contains the list of versions that the
 client knows its first flight is compatible with.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
-<p id="section-2.3-2">In order to do compatible version negotiation, the server <span class="bcp14">MUST</span> select
+<p id="section-2.3-2">In order to perform compatible version negotiation, the server <span class="bcp14">MUST</span> select
 one of these versions that (1) it supports and (2) it knows is
 compatible with the client's chosen version. Once the server has
 selected a version, termed the "negotiated version", it then attempts
@@ -1371,7 +1371,7 @@ to convert the client's first flight into that version, and replies to
 the client as if it had received the converted first flight.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
 <p id="section-2.3-3">If those formats are identical, as in cases where the negotiated
 version is the same as the client's chosen version, then this will be
-the identity transform). If the first flight is correctly formatted,
+the identity transform. If the first flight is correctly formatted,
 then this conversion process cannot fail by definition of the first
 flight being compatible; if the server is unable to convert the first
 flight, it <span class="bcp14">MUST</span> respond with CONNECTION_CLOSE and an error of
