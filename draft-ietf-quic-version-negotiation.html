@@ -1402,11 +1402,17 @@ version that follows.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
         <h3 id="name-client-choice-of-original-v">
 <a href="#section-2.5" class="section-number selfRef">2.5. </a><a href="#name-client-choice-of-original-v" class="section-name selfRef">Client Choice of Original Version</a>
         </h3>
-<p id="section-2.5-1">The client's first connection attempt <span class="bcp14">SHOULD</span> be made using the version that the
-server is most likely to support. The client selects the version most likely to
-be supported from the versions that are compatible with the client's most
-preferred version. Without additional information this could mean selecting the
-oldest version that the client supports.<a href="#section-2.5-1" class="pilcrow">¶</a></p>
+<p id="section-2.5-1">When the client picks its original version, it will try to avoid incompatible
+version negotiation to save a round trip. Therefore, the client <span class="bcp14">SHOULD</span> pick an
+original version to maximize the combined probability that both:<a href="#section-2.5-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.5-2.1">The server knows how to parse first flights from the original version.<a href="#section-2.5-2.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-2.5-2.2">The original version is compatible with the client's preferred version.<a href="#section-2.5-2.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-2.5-3">Without additional information, this could mean selecting the oldest version
+that the client supports.<a href="#section-2.5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
