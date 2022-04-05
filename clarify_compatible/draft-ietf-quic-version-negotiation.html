@@ -1242,7 +1242,7 @@ establishment if needed.<a href="#section-1-2" class="pilcrow">¶</a></p>
 given that most incremental versions are broadly similar to the the previous
 version. This specification also defines a simple version negotiation mechanism
 which leverages similarities between versions and can negotiate between the set
-of "compatible" versions jointly supported by without additional round trips.<a href="#section-1-3" class="pilcrow">¶</a></p>
+of "compatible" versions without additional round trips.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="conventions-and-definitions">
 <section id="section-1.1">
         <h3 id="name-conventions-and-definitions">
@@ -1281,12 +1281,12 @@ given QUIC connection as the "client's chosen version".<a href="#section-2-2" cl
 parse first flights from the original version. If it does not, then it starts
 incompatible version negotiation, see <a href="#incompat-vn" class="xref">Section 2.1</a>, which causes the
 client to initiate a new connection with a different version.
-For instance, if the client initiates a connection with version 1
+For instance, if the client initiates a connection with version A
 and the server starts incompatible version negotiation and the client
-then initiates a new connection with version 2, we say that
-the first connection's client chosen version is 1, the second connection's
-client chosen is 2, and the original version for the entire
-sequence is 1.<a href="#section-2-3" class="pilcrow">¶</a></p>
+then initiates a new connection with version B, we say that
+the first connection's client chosen version is A, the second connection's
+client chosen version is B, and the original version for the entire
+sequence is A.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">If the server can parse the first flight, it can either establish the
 connection using the client's chosen version, or it <span class="bcp14">MAY</span> select any other
 compatible version, as described in <a href="#compat-vn" class="xref">Section 2.3</a>.<a href="#section-2-4" class="pilcrow">¶</a></p>
@@ -1364,8 +1364,8 @@ chosen version, it can extract the client's Version Information structure
 (see <a href="#vers-info" class="xref">Section 3</a>). This contains the list of versions that the
 client knows its first flight is compatible with.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
 <p id="section-2.3-2">In order to perform compatible version negotiation, the server <span class="bcp14">MUST</span> select
-one of these versions that (1) it supports and (2) it knows is
-compatible with the client's chosen version. Once the server has
+one of these versions that (1) it supports and (2) it knows
+the client's chosen version to be compatible with. Once the server has
 selected a version, termed the "negotiated version", it then attempts
 to convert the client's first flight into that version, and replies to
 the client as if it had received the converted first flight.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
@@ -1374,8 +1374,7 @@ version is the same as the client's chosen version, then this will be
 the identity transform. If the first flight is correctly formatted,
 then this conversion process cannot fail by definition of the first
 flight being compatible; if the server is unable to convert the first
-flight, it <span class="bcp14">MUST</span> respond with CONNECTION_CLOSE and an error of
-PROTOCOL_VIOLATION.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
+flight, it <span class="bcp14">MUST</span> abort the handshake.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
 <p id="section-2.3-4">Clients can determine the server's negotiated version by examining
 the QUIC long header Version field. It is possible for the server to
 initially send packets with the client's chosen version before switching to the
