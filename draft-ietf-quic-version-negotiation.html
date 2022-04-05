@@ -1392,18 +1392,24 @@ Information Transport Parameter.<a href="#section-2.3-6" class="pilcrow">¶</a><
 version), it will perform incompatible version negotiation instead, see
 <a href="#incompat-vn" class="xref">Section 2.1</a>.<a href="#section-2.3-7" class="pilcrow">¶</a></p>
 <p id="section-2.3-8">Note that it is possible to have incompatible version negotation followed by
-compatible version negotiation. For instance, if A and B are compatible and
-versions C and D are compatible, the following scenario may occur:<a href="#section-2.3-8" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-2.3-9">
+compatible version negotiation. For instance, if version A is compatible with B
+and C is compatible with D, the following scenario could occur:<a href="#section-2.3-8" class="pilcrow">¶</a></p>
+<span id="name-combined-negotiation-exampl"></span><div id="fig-dual-example">
+<figure id="figure-1">
+          <div class="alignLeft art-text artwork" id="section-2.3-9.1">
 <pre>
-    Client                                          Server
+Client                                          Server
 
-    Chosen = A, Other Versions = (A, B) -----------------&gt;
-    &lt;------------------------ Version Negotiation = (D, C)
+Chosen = A, Other Versions = (A, B) -----------------&gt;
+&lt;------------------------ Version Negotiation = (D, C)
 
-    Chosen = C, Other Versions = (C, D) -----------------&gt;
-    &lt;-------------------------------------- Negotiated = D
-</pre><a href="#section-2.3-9" class="pilcrow">¶</a>
+Chosen = C, Other Versions = (C, D) -----------------&gt;
+&lt;-------------------------------------- Negotiated = D
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-combined-negotiation-exampl" class="selfRef">Combined Negotiation Example</a>
+          </figcaption></figure>
 </div>
 <p id="section-2.3-10">In this example, the client selected C from the server's Version Negotiation
 packet, but the server preferred D and then selected it from the client's offer.<a href="#section-2.3-10" class="pilcrow">¶</a></p>
@@ -1463,7 +1469,7 @@ authenticated.<a href="#section-3-1" class="pilcrow">¶</a></p>
 parameter, version_information. The contents of Version Information are shown
 below (using the notation from the "Notational Conventions" section of <span>[<a href="#QUIC" class="xref">QUIC</a>]</span>):<a href="#section-3-2" class="pilcrow">¶</a></p>
 <span id="name-version-information-format"></span><div id="fig-vi-format">
-<figure id="figure-1">
+<figure id="figure-2">
         <div class="alignLeft art-text artwork" id="section-3-3.1">
 <pre>
 Version Information {
@@ -1472,7 +1478,7 @@ Version Information {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
 <a href="#name-version-information-format" class="selfRef">Version Information Format</a>
         </figcaption></figure>
 </div>
