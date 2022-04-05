@@ -82,7 +82,6 @@ Table of Contents
      6.1.  Interaction with Retry
      6.2.  Interaction with TLS resumption
      6.3.  Interaction with 0-RTT
-     6.4.  Special Case Behavior for QUIC Version 1
    7.  Security Considerations
    8.  IANA Considerations
      8.1.  QUIC Transport Parameter
@@ -570,13 +569,6 @@ Table of Contents
    accomplished by defining which transformations are applied to 0-RTT
    packets.  Alternatively, that document could specify that compatible
    version negotiation causes 0-RTT data to be rejected by the server.
-
-6.4.  Special Case Behavior for QUIC Version 1
-
-   QUIC version 1 was standardized prior to the publication of this
-   document and therefore QUICv1 servers may not support this extension.
-   If a client implementations whch start a QUICv1 connection in
-   response to a version negotiation packet and the server omits, the
 
 7.  Security Considerations
 
