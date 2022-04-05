@@ -23,12 +23,18 @@ Abstract
    flight format, the negotiation can take place without incurring an
    extra round trip.
 
-Discussion Venues
+About This Document
 
    This note is to be removed before publishing as an RFC.
 
+   The latest revision of this draft can be found at
+   https://quicwg.github.io/version-negotiation/draft-ietf-quic-version-
+   negotiation.html.  Status information for this document may be found
+   at https://datatracker.ietf.org/doc/draft-ietf-quic-version-
+   negotiation/.
+
    Discussion of this document takes place on the QUIC Working Group
-   mailing list (quic@ietf.org), which is archived at
+   mailing list (mailto:quic@ietf.org), which is archived at
    https://mailarchive.ietf.org/arch/browse/quic/.
 
    Source for this draft and an issue tracker can be found at
@@ -78,15 +84,17 @@ Table of Contents
    3.  Version Information
    4.  Version Downgrade Prevention
    5.  Server Deployments of QUIC
-   6.  Considerations for Future Versions
-     6.1.  Interaction with Retry
-     6.2.  Interaction with TLS resumption
-     6.3.  Interaction with 0-RTT
-   7.  Security Considerations
-   8.  IANA Considerations
-     8.1.  QUIC Transport Parameter
-     8.2.  QUIC Transport Error Code
-   9.  Normative References
+   6.  Application Layer Protocol Considerations
+   7.  Considerations for Future Versions
+     7.1.  Interaction with Retry
+     7.2.  Interaction with TLS resumption
+     7.3.  Interaction with 0-RTT
+   8.  Special Handling for QUIC Version 1
+   9.  Security Considerations
+   10. IANA Considerations
+     10.1.  QUIC Transport Parameter
+     10.2.  QUIC Transport Error Code
+   11. Normative References
    Acknowledgments
    Authors' Addresses
 
@@ -118,8 +126,8 @@ Table of Contents
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-   "OPTIONAL" in this document are to be interpreted as described in BCP
-   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
    In this document, the Maximum Segment Lifetime (MSL) represents the
@@ -232,15 +240,6 @@ Table of Contents
    concurrently and then specified as compatible in a third document
    much later - in that scenario one endpoint might be aware of the
    compatibility document while the other may not.
-
-   When a client creates a QUIC connection, its goal is to use an
-   application layer protocol.  Therefore, when considering which
-   versions are compatible, clients will only consider versions that
-   support one of the intended application layer protocols.  For
-   example, if the client's first flight advertises multiple Application
-   Layer Protocol Negotiation (ALPN) [ALPN] tokens and multiple
-   compatible versions, the server needs to ensure that the ALPN token
-   that it selects can run over the QUIC version that it selects.
 
 2.3.  Compatible Version Negotiation
 
@@ -367,7 +366,6 @@ Table of Contents
       to allow the client to communicate the chosen version's
       preference.  Note that this preference is only advisory, servers
       MAY choose to use their own preference instead.
-
    Server-Sent Other Versions:  When sent by a server, the Other
       Versions field lists all the Fully-Deployed Versions of this
       server deployment, see Section 5.  Note that the version in the
@@ -401,7 +399,7 @@ Table of Contents
    Every QUIC version that supports version negotiation MUST define a
    method for closing the connection with a version negotiation error.
    For QUIC version 1, version negotiation errors are signaled using a
-   transport error of type VERSION_NEGOTIATION_ERROR; see Section 8.2.
+   transport error of type VERSION_NEGOTIATION_ERROR; see Section 10.2.
 
    If the Version Information was missing, the endpoints MAY complete
    the handshake.  However, if a client has reacted to a Version
@@ -451,13 +449,11 @@ Table of Contents
       given server instance.  More specifically, these are the versions
       that a given server instance will use if a client sends a first
       flight using them.
-
    Offered Versions:  This is the set of versions that a given server
       instance will send in a Version Negotiation packet if it receives
       a first flight from an unknown version.  This set will most often
       be equal to the Acceptaple Versions set, except during short
       transitions while versions are added or removed (see below).
-
    Fully-Deployed Versions:  This is the set of QUIC versions that is
       supported and negotiated by every single QUIC server instance in
       this deployment.  If a deployment only contains a single server
@@ -518,7 +514,37 @@ Table of Contents
    could be due to clients communicating with both updated and non-
    updated server instances.
 
-6.  Considerations for Future Versions
+6.  Application Layer Protocol Considerations
+
+   When a client creates a QUIC connection, its goal is to use an
+   application layer protocol.  Therefore, when considering which
+   versions are compatible, clients will only consider versions that
+   support one of the intended application layer protocols.  If the
+   client's first flight advertises multiple Application Layer Protocol
+   Negotiation (ALPN) [ALPN] tokens and multiple compatible versions, it
+   is possible for some application layer protocols to not be able to
+   run over some of the offered compatible versions.  It is the server's
+   responsibility to only select an ALPN token that can run over the
+   compatible QUIC version that it selects.
+
+   A given ALPN token MUST NOT be used with a new QUIC version different
+   from the version for which the ALPN token was originally defined,
+   unless all the following requirements are met:
+
+   *  The new QUIC version supports the transport features required by
+      the application protocol.
+
+   *  The new QUIC version supports ALPN.
+
+   *  The version of QUIC for which the ALPN token was originally
+      defined is compatible with the new QUIC version.
+
+   When incompatible version negotiation is in use, the second
+   connection which is created in response to the received version
+   negotiation packet MUST restart its application layer protocol
+   negotiation process without taking into account the original version.
+
+7.  Considerations for Future Versions
 
    In order to facilitate the deployment of future versions of QUIC,
    designers of future versions SHOULD attempt to design their new
@@ -529,7 +555,7 @@ Table of Contents
    widely deployed, this section discusses considerations for future
    versions to help with compatibility with QUIC version 1.
 
-6.1.  Interaction with Retry
+7.1.  Interaction with Retry
 
    QUIC version 1 features Retry packets, which the server can send to
    validate the client's IP address before parsing the client's first
@@ -542,24 +568,24 @@ Table of Contents
    versions that support retry, that document MUST specify how version
    negotiation (both compatible and incompatible) interacts with retry
    during a handshake that requires both.  For example, that could be
-   accomplished by having the server send a Retry packet in the client's
-   chosen version first and therefore validating the client's IP address
-   before attempting compatible version negotiation.  If both versions
-   support authenticating Retry packets, the compatibility defition
-   needs to define how to authenticate the Retry in the negotiated
-   version handshake even though the Retry itself was sent using the
-   client's chosen version.
+   accomplished by having the server send a Retry packet in the original
+   version first thereby validating the client's IP address before
+   attempting compatible version negotiation.  If both versions support
+   authenticating Retry packets, the compatibility defition needs to
+   define how to authenticate the Retry in the negotiated version
+   handshake even though the Retry itself was sent using the client's
+   chosen version.
 
-6.2.  Interaction with TLS resumption
+7.2.  Interaction with TLS resumption
 
    QUIC version 1 uses TLS 1.3, which supports session resumption by
    sending session tickets in one connection that can be used in a later
    connection; see Section 2.2 of [TLS].  New versions that also use TLS
-   1.3 SHOULD mandate that their session tickets are rightly scoped to
+   1.3 SHOULD mandate that their session tickets are tightly scoped to
    one version of QUIC; i.e., require that clients not use them across
-   version and that servers validate this client requirement.
+   multiple version and that servers validate this client requirement.
 
-6.3.  Interaction with 0-RTT
+7.3.  Interaction with 0-RTT
 
    QUIC version 1 allows sending data from the client to the server
    during the handshake, by using 0-RTT packets.  If a future document
@@ -567,10 +593,26 @@ Table of Contents
    0-RTT, that document MUST address the scenario where there are 0-RTT
    packets in the client's first flight.  For example, this could be
    accomplished by defining which transformations are applied to 0-RTT
-   packets.  Alternatively, that document could specify that compatible
-   version negotiation causes 0-RTT data to be rejected by the server.
+   packets.  That document could specify that compatible version
+   negotiation causes 0-RTT data to be rejected by the server.
 
-7.  Security Considerations
+8.  Special Handling for QUIC Version 1
+
+   Because QUIC version 1 was the only IETF Standards Track version of
+   QUIC published before this document, it is handled specially as
+   follows: if a client is starting a QUIC version 1 connection in
+   response to a received Version Negotiation packet, and the
+   version_information transport parameter is missing from the server's
+   transport parameters, then the client SHALL proceed as if the
+   server's transport parameters contained a version_information
+   transport parameter with a Chosen Version set to 0x00000001 and an
+   Other Version list containing exactly one version set to 0x00000001.
+   This allows version negotiation to work with servers that only
+   support QUIC version 1.  Note that implementations which wish to use
+   version negotiation to negotiate versions other than QUIC version 1
+   will need to implement this draft.
+
+9.  Security Considerations
 
    The security of this version negotiation mechanism relies on the
    authenticity of the Version Information exchanged during the
@@ -583,47 +625,40 @@ Table of Contents
    possibility of cross-protocol attacks, but more analysis is still
    needed here.
 
-8.  IANA Considerations
+10.  IANA Considerations
 
-8.1.  QUIC Transport Parameter
+10.1.  QUIC Transport Parameter
 
-   This document registers a new value in the QUIC Transport Parameter
-   Registry maintained at https://www.iana.org/assignments/quic/
-   quic.xhtml#quic-transport.
+   This document registers a new value in the "QUIC Transport
+   Parameters" registry maintained at <https://www.iana.org/assignments/
+   quic>.
 
    Value:  0xFF73DB
-
    Parameter Name:  version_information
-
    Status:  provisional
-
    Specification:  This document
 
    When this document is approved, it will request permanent allocation
    of a codepoint in the 0-63 range to replace the provisional codepoint
    described above.
 
-8.2.  QUIC Transport Error Code
+10.2.  QUIC Transport Error Code
 
-   This document registers a new value in the QUIC Transport Error Codes
-   Registry maintained at https://www.iana.org/assignments/quic/
-   quic.xhtml#quic-transport-error-codes.
+   This document registers a new value in the "QUIC Transport Error
+   Codes" registry maintained at <https://www.iana.org/assignments/
+   quic>.
 
    Value:  0x53F8
-
    Code:  VERSION_NEGOTIATION_ERROR
-
    Description:  Error negotiating version
-
    Status:  provisional
-
    Specification:  This document
 
    When this document is approved, it will request permanent allocation
    of a codepoint in the 0-63 range to replace the provisional codepoint
    described above.
 
-9.  Normative References
+11.  Normative References
 
    [ALPN]     Friedl, S., Popov, A., Langley, A., and E. Stephan,
               "Transport Layer Security (TLS) Application-Layer Protocol
@@ -663,7 +698,7 @@ Authors' Addresses
    David Schinazi
    Google LLC
    1600 Amphitheatre Parkway
-   Mountain View, California 94043,
+   Mountain View, CA 94043
    United States of America
    Email: dschinazi.ietf@gmail.com
 
