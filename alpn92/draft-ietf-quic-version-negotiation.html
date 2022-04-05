@@ -1619,16 +1619,17 @@ protocols. For example, if the client's first flight advertises multiple
 Application Layer Protocol Negotiation (ALPN) <span>[<a href="#ALPN" class="xref">ALPN</a>]</span> tokens and
 multiple compatible versions, the server needs to ensure that the ALPN token
 that it selects can run over the QUIC version that it selects.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">A given ALPN token <span class="bcp14">MUST NOT</span> be used with multiple QUIC versions unless all the
+<p id="section-6-2">A given ALPN token <span class="bcp14">MUST NOT</span> be used with a new QUIC version different from the
+version for which the ALPN token was originally defined, unless all the
 following requirements are met:<a href="#section-6-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6-3.1">These QUIC versions support the transport features required by the application
-protocol.<a href="#section-6-3.1" class="pilcrow">¶</a>
+<li class="normal" id="section-6-3.1">The new QUIC version supports the transport features required by the
+application protocol.<a href="#section-6-3.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-6-3.2">These QUIC versions support ALPN.<a href="#section-6-3.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-6-3.2">The new QUIC version supports ALPN.<a href="#section-6-3.2" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-6-3.3">The version of QUIC for which the ALPN token was originally defined is
-compatible with these QUIC versions.<a href="#section-6-3.3" class="pilcrow">¶</a>
+compatible with the new QUIC version.<a href="#section-6-3.3" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="section-6-4">When incompatible version negotiation is in use, the second connection which is
