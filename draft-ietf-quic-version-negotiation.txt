@@ -5,8 +5,8 @@
 QUIC                                                         D. Schinazi
 Internet-Draft                                                Google LLC
 Intended status: Standards Track                             E. Rescorla
-Expires: 7 October 2022                                          Mozilla
-                                                            5 April 2022
+Expires: 8 October 2022                                          Mozilla
+                                                            6 April 2022
 
 
                 Compatible Version Negotiation for QUIC
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 October 2022.
+   This Internet-Draft will expire on 8 October 2022.
 
 Copyright Notice
 
@@ -302,7 +302,7 @@ Table of Contents
    <------------------------ Version Negotiation = (D, C)
 
    Chosen = C, Other Versions = (C, D) ----------------->
-   <-------------------------------------- Negotiated = D
+   <----------------- Chosen = D, Other Versions = (D, C)
 
                    Figure 1: Combined Negotiation Example
 
